@@ -3,8 +3,8 @@
 
 Fruit& Fruit::CreateFruit() {
     do {
-        m_fruit.x = 1 + static_cast<float>(Random(m_field_width));
-        m_fruit.y = 1 + static_cast<float>(Random(m_field_height));
+        m_fruit.x = 1 + static_cast<float>(Random(g_FIELD_WIDTH-2));
+        m_fruit.y = 1 + static_cast<float>(Random(g_FIELD_HEIGHT-2));
         m_fruit.direction = Random(3);
     } while (false);//Walls::Get()[fruit_coord]);
     return *this;
@@ -12,15 +12,15 @@ Fruit& Fruit::CreateFruit() {
 
 Fruit& Fruit::Render(sf::RenderWindow& window) {
     if (GetFruit() == 0) {
-        orange.setPosition(m_cell * Getx(), m_cell * Gety());
+        orange.setPosition(g_CELL * Getx(), g_CELL * Gety());
         window.draw(orange);
     }
     if (GetFruit() == 1) {
-        rasberry.setPosition(m_cell * Getx(), m_cell * Gety());
+        rasberry.setPosition(g_CELL * Getx(), g_CELL * Gety());
         window.draw(rasberry);
     }
     if (GetFruit() == 2) {
-        watermelon.setPosition(m_cell * Getx(), m_cell * Gety());
+        watermelon.setPosition(g_CELL * Getx(), g_CELL * Gety());
         window.draw(watermelon);
     }
     return *this;

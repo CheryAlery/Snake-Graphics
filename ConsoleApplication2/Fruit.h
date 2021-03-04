@@ -4,13 +4,15 @@
 #include <ctime>
 #include "Header.h"
 
-
+extern const int g_FIELD_WIDTH;
+extern const int g_FIELD_HEIGHT;
+extern const int g_CELL;
 
 class Fruit {
 public:
-    Fruit(int field_width, int field_height,int cell=20) :
-        m_field_width{ field_width - 2},
-        m_field_height{ field_height - 2 }, m_cell{cell} {
+
+    // ïîäàòü íà âõîä âåêòîğ òåêñòóğ
+    Fruit() {
         m_fruits_texture.loadFromFile("D:\\VS\\fruits.png");
 
         // ÏÎÄÓÌÀÒÜ ÊÀÊ ÑÄÅËÀÒÜ ÈÍÈÖÈÀËÈÇÀÖÈŞ ÈËÈ ÁÅÇ ÏÎÂÒÎĞÎÂ
@@ -21,7 +23,6 @@ public:
         watermelon.setTextureRect(sf::IntRect(20, 0, 20, 20));
         orange.setTexture(m_fruits_texture);
         orange.setTextureRect(sf::IntRect(40, 0, 20, 20));
-
         CreateFruit();
 
     }
@@ -40,9 +41,6 @@ private:
     sf::Sprite watermelon;
     sf::Sprite orange;
     coord m_fruit;
-    const int m_cell;
-    const int m_field_width;
-    const int m_field_height;
     int random = 0;
     int Random(const int max);
 };
