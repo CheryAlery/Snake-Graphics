@@ -2,18 +2,18 @@
 
 Snake& Snake::Render(sf::RenderWindow& window) {
     if (m_lenght > 1) {
-        tail.setRotation(90 * snake[m_lenght - 2].direction);
-        tail.setPosition(g_CELL * (snake[m_lenght - 1].x + 0.5), g_CELL * (snake[m_lenght - 1].y + 0.5));
+        m_tail.setRotation(90 * m_snake[m_lenght - 2].direction);
+        m_tail.setPosition(g_CELL * (m_snake[m_lenght - 1].x + 0.5), g_CELL * (m_snake[m_lenght - 1].y + 0.5));
     }
-    window.draw(tail);
+    window.draw(m_tail);
     for (int i = 1; i < m_lenght - 1; ++i) {
-        body.setRotation(90 * snake[i].direction);
-        body.setPosition(g_CELL * (snake[i].x + 0.5), g_CELL * (snake[i].y + 0.5));
-        window.draw(body);
+        m_body.setRotation(90 * m_snake[i].direction);
+        m_body.setPosition(g_CELL * (m_snake[i].x + 0.5), g_CELL * (m_snake[i].y + 0.5));
+        window.draw(m_body);
     }
-    face.setRotation(90 * snake[0].direction);
-    face.setPosition(g_CELL * (snake[0].x + 0.5), g_CELL * (snake[0].y + 0.5));
-    window.draw(face);
+    m_face.setRotation(90 * m_snake[0].direction);
+    m_face.setPosition(g_CELL * (m_snake[0].x + 0.5), g_CELL * (m_snake[0].y + 0.5));
+    window.draw(m_face);
     return *this;
 };
 
@@ -23,14 +23,14 @@ Snake& Snake::EatFood() {
 }
 
 bool Snake::Go(const float x, const float y, const int direction) {
-    snake.insert(snake.begin(), { x,y,direction });
-    snake.resize(m_lenght);
+    m_snake.insert(m_snake.begin(), { x,y,direction });
+    m_snake.resize(m_lenght);
     return CanGo(x, y);
 };
 
 bool Snake::CanGo(const float x, const float y) const {
     bool head = true;
-    for (const auto& coord : snake) {
+    for (const auto& coord : m_snake) {
         if (head) {
             head = false;
             continue;

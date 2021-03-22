@@ -15,17 +15,17 @@ Walls& Walls::CreateVerticalWall(const int length, const float x, const float y)
 };
 
 void Walls::Render(sf::RenderWindow& window) {
-    wall.setPosition(0.f, 0.f);
-    wall.setRotation(0.f);
-    window.draw(wall);
-    wall.move(0.f, (g_FIELD_WIDTH - 1) * g_CELL);
-    window.draw(wall);
-    wall.setRotation(90.f);
-    wall.setPosition(g_CELL, g_CELL);
-    window.draw(wall);
-    wall.move((g_FIELD_WIDTH - 1) * g_CELL, 0.f);
-    window.draw(wall);
-    window.draw(field);
+    m_wall.setPosition(0.f, 0.f);
+    m_wall.setRotation(0.f);
+    window.draw(m_wall);
+    m_wall.move(0.f, (g_FIELD_WIDTH - 1) * g_CELL);
+    window.draw(m_wall);
+    m_wall.setRotation(90.f);
+    m_wall.setPosition(g_CELL, g_CELL);
+    window.draw(m_wall);
+    m_wall.move((g_FIELD_WIDTH - 1) * g_CELL, 0.f);
+    window.draw(m_wall);
+    window.draw(m_field);
 };
 
 bool Walls::Here(float x, float y) {

@@ -6,25 +6,18 @@
 
 extern const int g_FIELD_WIDTH;
 extern const int g_FIELD_HEIGHT;
-extern const int g_CELL;
+extern const unsigned int g_CELL;
 
 class Fruit {
 public:
 
     // подать на вход вектор текстур
-    Fruit() {
-        m_fruits_texture.loadFromFile("D:\\VS\\fruits.png");
-
-        // ПОДУМАТЬ КАК СДЕЛАТЬ ИНИЦИАЛИЗАЦИЮ ИЛИ БЕЗ ПОВТОРОВ
-
-        rasberry.setTexture(m_fruits_texture);
-        rasberry.setTextureRect(sf::IntRect(0, 0, 20, 20));       
-        watermelon.setTexture(m_fruits_texture);
-        watermelon.setTextureRect(sf::IntRect(20, 0, 20, 20));
-        orange.setTexture(m_fruits_texture);
-        orange.setTextureRect(sf::IntRect(40, 0, 20, 20));
+    Fruit(sf::Texture& texture) : m_fruits_texture{texture},
+        m_rasberry{ m_fruits_texture ,sf::IntRect(0, 0, 20, 20) },
+        m_watermelon{ m_fruits_texture ,sf::IntRect(20, 0, 20, 20) },
+        m_orange{ m_fruits_texture ,sf::IntRect(40, 0, 20, 20) }
+    {
         CreateFruit();
-
     }
 
     // создает фрукт в поле с заданной шириной и высотой
@@ -37,9 +30,9 @@ public:
 
 private:
     sf::Texture m_fruits_texture;
-    sf::Sprite rasberry;
-    sf::Sprite watermelon;
-    sf::Sprite orange;
+    sf::Sprite m_rasberry;
+    sf::Sprite m_watermelon;
+    sf::Sprite m_orange;
     coord m_fruit;
     int random = 0;
     int Random(const int max);

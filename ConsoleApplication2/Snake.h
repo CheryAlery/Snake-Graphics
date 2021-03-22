@@ -3,28 +3,22 @@
 #include "Header.h"
 
 
-extern const int g_CELL;
+extern const unsigned int g_CELL;
 
 class Snake
 {
 public:
-    Snake(const std::string name, const int lenght = 1) : m_name{ name }, m_lenght{ lenght }
-    {
-        m_snake_texture.loadFromFile("D:\\VS\\snake.png");
-
-        // œŒƒ”Ã¿“‹  ¿  —ƒ≈À¿“‹ »Õ»÷»¿À»«¿÷»ﬁ »À» ¡≈« œŒ¬“Œ–Œ¬
-
-        face.setTexture(m_snake_texture);
-        face.setTextureRect(sf::IntRect(0, 0, 20, 20));
-        face.setOrigin(g_CELL / 2, g_CELL / 2);
-        body.setTexture(m_snake_texture);
-        body.setTextureRect(sf::IntRect(20, 0, 20, 20));
-        body.setOrigin(g_CELL / 2, g_CELL / 2);
-        tail.setTexture(m_snake_texture);
-        tail.setTextureRect(sf::IntRect(40, 0, 20, 20));
-        tail.setOrigin(g_CELL / 2, g_CELL / 2);
-
-
+    Snake(sf::Texture& texture, const sf::String name = "", const int lenght = 1) : 
+        m_name{ name }, 
+        m_lenght{ lenght },
+        m_snake_texture{texture},
+        m_face { m_snake_texture, sf::IntRect(0, 0, 20, 20)},
+        m_body { m_snake_texture, sf::IntRect(20, 0, 20, 20)},
+        m_tail { m_snake_texture, sf::IntRect(40, 0, 20, 20)}
+    {    
+        m_face.setOrigin(g_CELL / 2, g_CELL / 2);
+        m_body.setOrigin(g_CELL / 2, g_CELL / 2);
+        m_tail.setOrigin(g_CELL / 2, g_CELL / 2);
     }
 
     ~Snake() {
@@ -41,17 +35,20 @@ public:
         return m_lenght;
     };
 
+    sf::String& GetName() {
+        return m_name;
+    }
+
 private:
     sf::Texture m_snake_texture;
-    sf::Sprite face;
-    sf::Sprite body;
-    sf::Sprite tail;
-
+    sf::Sprite m_face;
+    sf::Sprite m_body;
+    sf::Sprite m_tail;
+    sf::String m_name;
 
     int m_lenght;
-    const std::string m_name;
 
-    std::vector<coord> snake;
+    std::vector<coord> m_snake;
 
     bool CanGo(const float x, const float y) const;
 

@@ -12,16 +12,16 @@ Fruit& Fruit::CreateFruit() {
 
 Fruit& Fruit::Render(sf::RenderWindow& window) {
     if (GetFruit() == 0) {
-        orange.setPosition(g_CELL * Getx(), g_CELL * Gety());
-        window.draw(orange);
+        m_orange.setPosition(g_CELL * Getx(), g_CELL * Gety());
+        window.draw(m_orange);
     }
     if (GetFruit() == 1) {
-        rasberry.setPosition(g_CELL * Getx(), g_CELL * Gety());
-        window.draw(rasberry);
+        m_rasberry.setPosition(g_CELL * Getx(), g_CELL * Gety());
+        window.draw(m_rasberry);
     }
     if (GetFruit() == 2) {
-        watermelon.setPosition(g_CELL * Getx(), g_CELL * Gety());
-        window.draw(watermelon);
+        m_watermelon.setPosition(g_CELL * Getx(), g_CELL * Gety());
+        window.draw(m_watermelon);
     }
     return *this;
 };

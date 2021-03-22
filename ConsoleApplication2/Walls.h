@@ -6,20 +6,19 @@
 
 extern const int g_FIELD_WIDTH;
 extern const int g_FIELD_HEIGHT;
-extern const int g_CELL;
+extern const unsigned int g_CELL;
 
 class Walls
 {
 public:
     // получает длину и ширину поля, рисует его.
-    Walls()
-    {
-        wall_texture.setRepeated(true);
-        wall_texture.loadFromFile("D:\\VS\\testtexture2.jpg");
-        wall.setTexture(wall_texture);
-        wall.setTextureRect(sf::IntRect(0, 0, g_FIELD_WIDTH* g_CELL, g_CELL));
-        field.move(g_CELL, g_CELL);
-        field.setFillColor(sf::Color(025, 075, 025));
+    Walls(sf::Texture& texture) : 
+        m_wall_texture{texture},
+        m_wall{m_wall_texture,sf::IntRect(0, 0, g_FIELD_WIDTH * g_CELL, g_CELL)},
+        m_field{ { sf::Vector2f((g_FIELD_WIDTH - 2) * g_CELL, (g_FIELD_HEIGHT - 2) * g_CELL) } }
+    {   m_wall_texture.setRepeated(true);
+        m_field.move(g_CELL, g_CELL);
+        m_field.setFillColor(sf::Color(025, 075, 025));
     };
 
     // создаем горизонтальное препятствие в заданных коориднатах
@@ -34,10 +33,10 @@ public:
     bool Here(float x, float y);
 
 private:
-    sf::Texture wall_texture;
+    sf::Texture m_wall_texture;
     std::vector<coord> wall_coord;
-    sf::Sprite wall;
-    sf::RectangleShape field{ sf::Vector2f((g_FIELD_WIDTH - 2) * g_CELL, (g_FIELD_HEIGHT - 2) * g_CELL) };
+    sf::Sprite m_wall;
+    sf::RectangleShape m_field;
 
 };
 
